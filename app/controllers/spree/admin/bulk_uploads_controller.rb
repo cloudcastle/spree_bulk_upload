@@ -9,9 +9,19 @@ module Spree
         respond_with @bulk_uploads
       end
 
+      def new
+        @bulk_upload = Spree::BulkUpload.new
+        respond_with(@bulk_upload) do |format|
+          format.html { render :layout => !request.xhr? }
+          if request.xhr?
+            format.js   { render :layout => false }
+          end
+        end
+      end
+
       def create
         @bulk_upload = Spree::BulkUpload.create(upload_params)
-        respond_with @bulk_upload
+        redirect_to admin_bulk_uploads_path
       end
 
       private

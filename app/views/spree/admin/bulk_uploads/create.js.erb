@@ -1,0 +1,6 @@
+$('.no-objects-found').remove();
+if ($('#listing_prodict_exports').length == 0) {
+    $("#product_exports_wrpper").append('<%= escape_javascript(render partial: 'table') %>');
+}
+$('#listing_prodict_exports tbody').append('<%= escape_javascript(render partial: 'export_row', locals: {product_export: @product_export}) %>');
+

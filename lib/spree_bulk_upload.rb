@@ -1,2 +1,6 @@
 require 'spree_core'
 require 'spree_bulk_upload/engine'
+require 'spree_bulk_upload/processors/base'
+require 'spree_bulk_upload/processors/product_attributes'
+require 'spree_bulk_upload/processors/variant_attributes'
+require 'spree_bulk_upload/import_processor'

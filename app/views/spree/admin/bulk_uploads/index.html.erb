@@ -1,0 +1,23 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:product_imports) %>
+<% end %>
+
+<% content_for :page_actions do %>
+    <li>
+      <%= button_link_to Spree.t(:new_upload), new_admin_bulk_upload_path , { :remote => true, :icon => 'plus', :id => 'admin_new_upload' } %>
+    </li>
+<% end %>
+<div id="new_upload_wrapper">
+
+</div>
+<div id="product_imorts_wrpper">
+  <% if @bulk_uploads.any? %>
+      <%=	render partial: 'table' %>
+  <% else %>
+      <div class="alpha twelve columns no-objects-found">
+        <%= Spree.t(:no_resource_found, resource: I18n.t(:other, scope: 'activerecord.models.spree/bulk_upload')) %>
+      </div>
+  <% end %>
+</div>
+
+

@@ -31,6 +31,7 @@ module SpreeBulkUpload
       product = Spree::Product.joins(:master).
           where(Spree::Variant.arel_table[:sku].eq(master_sku)).first || Spree::Product.new
       product_attributes = Processors::ProductAttributes.new(master_sku, variants).get_attributes
+      binding.pry
       product.assign_attributes(product_attributes)
       product.save!
 
@@ -38,6 +39,7 @@ module SpreeBulkUpload
         variant = Spree::Variant.find_or_initialize_by(sku: v['SKU'])
         variant_attributes = Processors::VariantAttributes.new(v).get_attributes
         variant.assign_attributes(variant_attributes)
+        variant.product = product
         variant.save!
       end
     end
