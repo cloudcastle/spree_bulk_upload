@@ -22,7 +22,7 @@ class Spree::BulkUpload < ActiveRecord::Base
     uri = URI.join(ActionController::Base.asset_host,self.attachment.url)
     file = open(uri)
     csv_file = CSV.read(file, {headers: true})
-    SpreeBulkUpload::ImportProcessor.new(csv_file).run
+    SpreeBulkUpload::ImportProcessor.new(csv_file, self).run
   end
 
 end

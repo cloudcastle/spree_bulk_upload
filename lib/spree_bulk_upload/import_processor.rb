@@ -2,15 +2,20 @@ module SpreeBulkUpload
   class ImportProcessor
     attr_reader :csv_file
 
-    def initialize(csv_file)
+    def initialize(csv_file, upload)
       @csv_file = csv_file
+      @upload = upload
     end
 
     def run
-      ActiveRecord::Base.transaction do
-        grouped_products.each do |product_sku, variants|
+      @upload.update_attribute(:total_rows,csv_file.length)
+      @upload.update_attribute(:processed_rows, 0)
+      grouped_products.each do |product_sku, variants|
+        ActiveRecord::Base.transaction do
           process_product(product_sku, variants)
         end
+        @upload.processed_rows += 1
+        @upload.save
       end
     end
 
@@ -42,7 +47,6 @@ module SpreeBulkUpload
         variant.save!
       end
     end
-
 
 
   end
