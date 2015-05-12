@@ -7,17 +7,7 @@ module SpreeBulkUpload
       @upload = upload
     end
 
-    def run
-      @upload.update_attribute(:total_rows,csv_file.length)
-      @upload.update_attribute(:processed_rows, 0)
-      grouped_products.each do |product_sku, variants|
-        ActiveRecord::Base.transaction do
-          process_product(product_sku, variants)
-        end
-        @upload.processed_rows += 1
-        @upload.save
-      end
-    end
+
 
     protected
 
@@ -36,7 +26,7 @@ module SpreeBulkUpload
       product = Spree::Product.joins(:master).
           where(Spree::Variant.arel_table[:sku].eq(master_sku)).first || Spree::Product.new
       product_attributes = Processors::ProductAttributes.new(master_sku, variants).get_attributes
-      product.assign_attributes(product_attributes)
+      product.assign_attributes(product_attributes.merge('sku'=> master_sku))
       product.save!
 
       variants.each do |v|
