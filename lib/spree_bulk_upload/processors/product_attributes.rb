@@ -27,7 +27,11 @@ module SpreeBulkUpload
             'Available on Date' => 'available_on',
             'Description' => 'description',
             'Price' => 'price',
-            'Prototype' => 'prototype_id'
+            'Prototype' => 'prototype_id',
+            'Taxon' => {
+                attr: 'taxons',
+                value: lambda { |v| Spree::Taxon.where('lower(permalink) LIKE ?',v.downcase) }
+            }
         }
       end
 
