@@ -30,7 +30,7 @@ module SpreeBulkUpload
             'Prototype' => 'prototype_id',
             'Taxon' => {
                 attr: 'taxons',
-                value: lambda { |v| Spree::Taxon.where('lower(permalink) LIKE ?',v.downcase) }
+                value: lambda { |v| v.present? ? Spree::Taxon.where('lower(permalink) LIKE ?',v.downcase) : [] }
             }
         }
       end
