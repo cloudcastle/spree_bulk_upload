@@ -24,7 +24,9 @@ module SpreeBulkUpload
                 value: lambda {|v| Spree::TaxCategory.find_by_name!(v) if v }
             } ,
             'Cost' => 'cost_price',
-            'Available on Date' => 'available_on',
+            'Available on Date' => {
+                attr: 'available_on',
+                value: lambda {|v| Date.strptime(v, '%m/%d/%Y') if v}},
             'Description' => 'description',
             'Price' => 'price',
             'Prototype' => 'prototype_id',
