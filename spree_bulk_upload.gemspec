@@ -3,8 +3,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_bulk_upload'
   s.version     = '2.4.6'
-  s.summary     = 'TODO: Add gem summary here'
-  s.description = 'TODO: Add (optional) gem description here'
+  s.summary     = 'Bulk uploading of roducts'
   s.required_ruby_version = '>= 1.9.3'
 
   s.author    = 'Nick Chubarov'
