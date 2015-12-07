@@ -1,14 +1,21 @@
 <%= form_for [:admin, @bulk_upload], method: :post, url: admin_bulk_uploads_path, html: {multipart: true} do |f| %>
-    <fieldset data-hook="new_upload">
-      <legend align="center"><%= Spree.t(:new_upload) %></legend>
-      <%= f.field_container :attachment do %>
-          <%= f.label :attachment, Spree.t(:attachment) %> <span class="required">*</span><br />
-          <%= f.file_field :attachment, :class => 'fullwidth title', :required => true %>
-          <%= f.error_message_on :attachment %>
-      <% end %>
-    </fieldset>
 
-    <div class="form-buttons filter-actions actions" data-hook="buttons">
-      <%= button Spree.t('actions.create'), 'ok' %>
+  <fieldset data-hook="new_upload">
+    <div class="row">
+      <legend align="center"><%= Spree.t(:new_upload) %></legend>
     </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :attachment, Spree.t(:attachment) %>
+          <%= f.file_field :attachment, :required => true %>
+          <%= f.error_message_on :attachment %>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="form-actions" data-hook="buttons">
+    <%= button Spree.t('actions.create'), 'ok' %>
+  </div>
 <% end %>

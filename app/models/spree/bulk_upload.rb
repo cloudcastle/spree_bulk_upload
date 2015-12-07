@@ -19,7 +19,11 @@ class Spree::BulkUpload < ActiveRecord::Base
   private
 
   def run_import
-    uri = URI.join(ActionController::Base.asset_host,self.attachment.url)
+    uri = if ActionController::Base.asset_host.nil?
+      self.attachment.path
+    else
+      URI.join(ActionController::Base.asset_host,self.attachment.url)
+    end
     file = open(uri)
     csv_file = CSV.read(file, {headers: true})
     SpreeBulkUpload::ImportProcessor.new(csv_file, self).run

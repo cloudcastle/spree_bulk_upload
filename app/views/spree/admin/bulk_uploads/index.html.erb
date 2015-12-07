@@ -3,9 +3,9 @@
 <% end %>
 
 <% content_for :page_actions do %>
-    <li>
-      <%= button_link_to Spree.t(:new_upload), new_admin_bulk_upload_path , { :remote => true, :icon => 'plus', :id => 'admin_new_upload' } %>
-    </li>
+  <span id="new_ot_link">
+    <%= button_link_to Spree.t(:new_upload), new_admin_bulk_upload_path , { :remote => true, :icon => 'plus', :id => 'admin_new_upload', :class => "btn-success" } %>
+  </span>
 <% end %>
 <div id="new_upload_wrapper">
 
