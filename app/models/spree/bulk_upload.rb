@@ -4,6 +4,8 @@ class Spree::BulkUpload < ActiveRecord::Base
   validates_attachment :attachment, content_type: { content_type: "text/csv" }
   after_commit :run_import, on: :create
 
+  has_many :bulk_upload_errors, class_name: 'Spree::BulkUploadError'
+
   def finished?
     total_rows == processed_rows
   end

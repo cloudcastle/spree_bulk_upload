@@ -1,0 +1,32 @@
+<% content_for :page_title do %>
+    <%= Spree.t(:bulk_upload_errors) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <span id="back_to_error_list">
+    <%= button_link_to Spree.t(:bulk_uploads), admin_bulk_uploads_path, { :class => "btn-success"} %>
+  </span>
+<% end %>
+
+<table class="table" id='bulk_upload_errors_table'>
+  <thead>
+  <tr>
+    <th><%= Spree.t(:id) %></th>
+    <th><%= Spree.t(:error_message) %></th>
+    <th><%= Spree.t(:raw_data) %></th>
+    <th><%= Spree.t(:created_at) %></th>
+  </tr>
+  </thead>
+  <tbody>
+
+    <% @bulk_upload_errors.each do |e| %>
+      <tr>
+        <td><%= e.id %></td>
+        <td><%= e.error_message %></td>
+        <td><%= e.raw_data %></td>
+        <td><%= e.created_at %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>

@@ -3,6 +3,7 @@
   <td class="align-center"><%= upload.total_rows%></td>
   <td class="align-center"><%= upload.processed_rows %></td>
   <td class="align-center"><%= upload.finish_percent.round(2) %> %</td>
+  <td class="align-center"><%= link_to(upload.bulk_upload_errors.count, admin_bulk_upload_bulk_upload_errors_path(upload) ) %> </td>
   <td data-hook="admin_shipping_methods_index_row_actions" class="actions">
   </td>
 </tr>

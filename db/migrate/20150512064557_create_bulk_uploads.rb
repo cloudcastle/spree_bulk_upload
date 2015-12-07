@@ -9,5 +9,15 @@ class CreateBulkUploads < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    create_table :spree_bulk_upload_errors do |t|
+      t.integer :bulk_upload_id
+      t.string  :error_message
+      t.text    :raw_data
+      t.timestamps
+    end
+
+    add_index :spree_bulk_upload_errors, :bulk_upload_id
+
   end
 end

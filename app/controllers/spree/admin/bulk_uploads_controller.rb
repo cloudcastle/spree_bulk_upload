@@ -5,7 +5,7 @@ module Spree
       respond_to :html
 
       def index
-        @bulk_uploads = Spree::BulkUpload.all
+        @bulk_uploads = Spree::BulkUpload.order(id: :desc).all
         respond_with @bulk_uploads
       end
 
@@ -22,6 +22,10 @@ module Spree
       def create
         @bulk_upload = Spree::BulkUpload.create(upload_params)
         redirect_to admin_bulk_uploads_path
+      end
+
+      def bulk_upload_errors
+        @bulk_upload_errors = Spree::BulkUpload.find(params[:bulk_upload_id]).bulk_upload_errors
       end
 
       private
