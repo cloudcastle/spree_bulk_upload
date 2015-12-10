@@ -18,8 +18,6 @@ class Spree::BulkUpload < ActiveRecord::Base
     end
   end
 
-  private
-
   def run_import
     uri = if ActionController::Base.asset_host.nil?
       self.attachment.path
