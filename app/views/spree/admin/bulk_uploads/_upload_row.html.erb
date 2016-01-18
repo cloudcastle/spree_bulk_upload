@@ -1,4 +1,5 @@
 <tr id="<%= spree_dom_id upload %>" data-hook="admin_uploads_index_rows" class="<%= cycle('odd', 'even')%>">
+  <td class="align-center"><%= upload.attachment_file_name%></td>
   <td class="align-center"><%= pretty_time(upload.created_at) %></td>
   <td class="align-center"><%= upload.total_rows%></td>
   <td class="align-center"><%= upload.processed_rows %></td>
