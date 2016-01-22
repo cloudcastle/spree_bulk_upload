@@ -21,6 +21,9 @@ module Spree
 
       def create
         @bulk_upload = Spree::BulkUpload.create(upload_params)
+        if @bulk_upload.errors.count>0
+          flash[:error] = @bulk_upload.errors.full_messages.join('; ')
+        end
         redirect_to admin_bulk_uploads_path
       end
 
