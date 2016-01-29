@@ -1,7 +1,7 @@
 require 'csv'
 class Spree::BulkUpload < ActiveRecord::Base
   has_attached_file :attachment
-  validates_attachment :attachment, content_type: { content_type: "text/csv" }
+  validates_attachment_file_name :attachment, :matches => [/\.(csv)\z/i]
   after_commit :run_import, on: :create
 
   has_many :bulk_upload_errors, class_name: 'Spree::BulkUploadError'
